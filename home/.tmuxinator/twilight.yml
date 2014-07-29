@@ -1,0 +1,10 @@
+# ~/.tmuxinator/twilight.yml
+
+name: twilight
+root: ~/projects/twilight
+
+windows:
+  - main: gs && git --no-pager log --oneline -5
+  - git: git sh
+  - server: bundle exec rails server puma
+  - console: bundle exec rails console --sandbox
