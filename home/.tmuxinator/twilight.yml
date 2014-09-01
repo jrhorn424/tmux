@@ -4,7 +4,14 @@ name: twilight
 root: ~/projects/twilight
 
 windows:
-  - main: gs && git --no-pager log --oneline -5
-  - git: git sh
+  - code: vim
+  - git: gs && git --no-pager log --oneline -5 && git sh
   - server: bundle exec rails server puma
   - console: bundle exec rails console --sandbox
+  - mysql: mysql -u root
+  - info:
+      layout: main-horizontal
+      panes:
+        - bundle exec rake -T
+        - bundle exec rake routes
+
