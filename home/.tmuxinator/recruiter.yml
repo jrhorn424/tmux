@@ -4,58 +4,8 @@ name: recruiter
 root: ~/projects/recruiter
 
 windows:
-  - local:
-      layout: 60a6,238x70,0,0{150x70,0,0,4,87x70,151,0[87x34,151,0,8,87x35,151,35,9]}
-      panes:
-        - start:
-          - ls
-        - git:
-          - git wtf
-          - git branch -a
-        - guard:
-          - bin/guard
-  - logs:
-      layout: even-vertical
-      panes:
-        - devlog:
-          - tail -f log/development.log
-        - delayed_job:
-          - tail -f log/delayed_job.log
-  - staging:
-      layout: tiled
-      panes:
-        - ssh:
-          - ssh deploy@staging.ices-experiments.org
-          - cd /u/apps/recruiter/current
-          - ls -lah
-        - logs:
-          - ssh deploy@staging.ices-experiments.org
-          - cd /u/apps/recruiter/current
-          - tail -f log/production.log
-        - logs:
-          - ssh deploy@staging.ices-experiments.org
-          - cd /u/apps/recruiter/current
-          - tail -f log/unicorn.stderr.log
-        - stats:
-          - ssh deploy@staging.ices-experiments.org
-          - cd /u/apps/recruiter/current
-          - htop
-  - production:
-      layout: tiled
-      panes:
-        - ssh:
-          - ssh deploy@ices-experiments.org
-          - cd /u/apps/recruiter/current
-          - ls -lah
-        - logs:
-          - ssh deploy@ices-experiments.org
-          - cd /u/apps/recruiter/current
-          - tail -f log/production.log
-        - logs:
-          - ssh deploy@ices-experiments.org
-          - cd /u/apps/recruiter/current
-          - tail -f log/unicorn.stderr.log
-        - stats:
-          - ssh deploy@ices-experiments.org
-          - cd /u/apps/recruiter/current
-          - htop
+  - main: gs && git --no-pager log --oneline -5
+  - git: git sh
+  - server: bundle exec rails server
+  - console: bundle exec rails console
+  - jobs: bundle exec rake jobs:workoff
